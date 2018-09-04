@@ -1,9 +1,9 @@
 ### call all scripts
 rm(list=ls())
-
+source("Code/Functions/save2all.R")
 ### single year
 ### read data from csv: "Data/PM25/GlobalGWRc/*" + "Data/GDP/GDP.csv" & "Data/Position.csv"
-source("code/ReadData.R")  ### =>"Data/GDP_PM25_CSC" RData, csv and dta
+# source("code/ReadData.R")  ### =>"Data/GDP_PM25_CSC" RData, csv and dta
 
   ### called by ReadData.R
   # source("code/Functions/readPM25.R")
@@ -25,6 +25,8 @@ source("code/ReadData.R")  ### =>"Data/GDP_PM25_CSC" RData, csv and dta
 ### analysis for test, not ready
 # source("code/analysis.R") ### input : "Data/GDP_PM25.RData"
 
+### construct long diff
+source("code/Plots.R")
 
 
 

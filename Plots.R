@@ -9,6 +9,7 @@ library(ggplot2)
 #library(ggrepel)
 
 names(GDP_PM25_CSC) <- gsub(" |/|[(]|[)]","_",names(GDP_PM25_CSC))
+long_diff <- NULL
 for (target in names(GDP_PM25_CSC)[grep("CSC",names(GDP_PM25_CSC))]){
   GraphFolder <- paste0("Graph/",gsub("CSC.","",target),"/")
   dir.create(GraphFolder,showWarnings = F)
@@ -22,7 +23,7 @@ for (target in names(GDP_PM25_CSC)[grep("CSC",names(GDP_PM25_CSC))]){
                                                      ln_PM25 = log(Population.Weighted.PM2.5..ug.m3.),
                                                      ln_PM25_diff = ln_PM25 - lag(ln_PM25)) %>%
       filter(Year==FinalYear)
-
+    long_diff <- cbind(long_diff,long_diff0)
     ### plot for long difference of raw
     p <- ggplot(data=long_diff0,aes_string(x="ln_PM25_diff",y="ln_GDP_diff",color=target)) + geom_point() + theme_bw()+ 
       geom_text(aes(label=Country.Code),hjust=0, vjust=0,alpha=0.25)+
@@ -61,3 +62,6 @@ for (target in names(GDP_PM25_CSC)[grep("CSC",names(GDP_PM25_CSC))]){
 detach("package:dplyr",unload=T)  
 detach("package:psych",unload=T)  
 detach("package:ggplot2",unload=T)  
+
+### save data
+save2all(mydata=long_diff,filename="long_diff",filetype="CSV")
