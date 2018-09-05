@@ -26,7 +26,11 @@ source("Code/Functions/save2all.R")
 # source("code/analysis.R") ### input : "Data/GDP_PM25.RData"
 
 ### construct long diff
-source("code/Plots.R")
+# source("code/Plots.R")
+
+### summary of missing value
+source("code/SummaryStat.R")
+
 
 
 
